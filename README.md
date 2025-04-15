@@ -1,9 +1,9 @@
 # Sales agent Assistant [CoreDumpUseGarnier]
 
 ## Group members
-1. *Team Leader + System Architect* | Peeranat Ngamkiatkajorn 67070503429
-2. *Quality Assurance* | Paemika Yongwittayakul 67070503469
-3. *C Developer* | Khongpop Manowanna 67070503488
+1. **Team Leader + System Architect** | Peeranat Ngamkiatkajorn 67070503429
+2. **Quality Assurance** | Paemika Yongwittayakul 67070503469
+3. **C Developer** | Khongpop Manowanna 67070503488
 
 ## Problem Statement
 Sales representative agents want to recruit other agents as their downlines. Each agentearn commision not only from their own sale but also from the sales of their downlines. Wewant to implement a tree data structure to efficiently calculate commisions at different level.Sales representative agents want to recruit other agents as their downlines. Each agentearn commision not only from their own sale but also from the sales of their downlines. Wewant to implement a tree data structure to efficiently calculate commisions at different level.Sales representative agents want to recruit other agents as their downlines. Each agentearn commision not only from their own sale but also from the sales of their downlines. Wewant to implement a tree data structure to efficiently calculate commisions at different level.

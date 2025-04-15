@@ -14,7 +14,7 @@ Sales representative agents want to recruit other agents as their downlines. Eac
 - Commission will divides upward through tree, with each agent passinga portion of theirsales to their upline.
 - Specify commission earned from agents, compute the total earning for all agent in thesystem.
 
-## Technology Stack]
+## Technology Stack
 1. **Tree** - Represent a Multi Level Marketing (MLM) structure.
 2. **Linked List** - Store each agent's downline dynamically, contains their AgentID, Sales, Downlines (Child nodes).
 3. **Queue** - Process comission updates level by level with Breath First Search (BFS) which starts from agent who earned sales first.

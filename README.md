@@ -11,7 +11,7 @@ Sales representative agents want to recruit other agents as their downlines. Eac
 ## Functionality
 - Each agent has a unique ID and may have their downlines (Forming a tree).
 - Each agent recieve commission from their downlines.
-- Commission will divides upward through tree, with each agent passinga portion of theirsales to their upline.
+- Commission will divides upward through tree, with each agent passing portion of theirsales to their upline.
 - Specify commission earned from agents, compute the total earning for all agent in thesystem.
 
 ## Technology Stack

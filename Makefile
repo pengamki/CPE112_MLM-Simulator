@@ -6,7 +6,7 @@ OBJ = $(SRC:src/%.c=build/%.o)
 
 # ------------------------------ Constant Strings ------------------------------
 
-NAME = mlm_assist
+NAME = mlm_simulator
 
 CC = gcc
 
@@ -44,6 +44,7 @@ $(NAME):	$(OBJ)
 	@$(PROG_READY)
 
 build/%.o:	src/%.c
+	@mkdir -p ./build
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:

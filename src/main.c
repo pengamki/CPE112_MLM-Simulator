@@ -1,61 +1,135 @@
-#include "../include/mlmas.h"
-#include <stdio.h>
-#include <stdbool.h>
+#include "mlmas.h"
 
-typedef struct s_Agent {
-  int agent_id;
-  struct s_Agent *upline;
-  struct s_Agent *downlines[DOWNLINES_LIMIT];
-  int downlines_count;
-  float personal_sales; // Total sales
-  floar commission_earning; // Earning from commission
-  float personal_commission_rate; // Percentage of commission earned from sales
-  float downline_commission_rate; // Percentage of commission earced from downlines
-} t_Agent;
-
-typedef struct s_HashTable {
-  int agent_id;
-  t_Agent *agent_node;
-  bool occupied;
-} t_HashTable;
-
-void init_table(t_HashTable table)
+void manager_menu(t_AgentHashTable *agent_table[])
 {
-  for (int i = 0; i < AGENTS_LIMIT; i++)
-  {
-    table[i].occupied = true;
-    table[i].agent_node = NULL;
-  }
+    int choice;
+
+    while(1)
+    {
+        printf("\n--- Manager menu ---\n");
+        printf("1. Add an agent\n");
+        printf("2. Edit an agent commission rate\n");
+        printf("3. Remove an agent\n");
+        printf("4. Query an agent\n");
+        printf("5. View agent tree\n");
+        printf("0. Exit\n");
+
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                add_agent(agent_table);
+                break;
+            case 2:
+                update_agent(agent_table);
+                break;
+            case 3:
+                remove_agent(agent_table);
+                break;
+            case 4:
+                query_agent(agent_table);
+                break;
+            case 5:
+                agent_tree(agent_table);
+                break;
+            case 0:
+                printf("Exiting manager menu.\n");
+                return ;
+            default:
+                printf("Invalid choice, try again.\n");
+        }
+    }
+}
+
+void client_menu(t_AgentHashTable *agent_table[])
+{
+    int choice;
+
+    while(1)
+    {
+        printf("\n--- Client menu ---\n");
+        printf("1. Make a payment\n");
+        printf("0. Exit\n");
+        
+        printf("\nEnter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+            case 1:
+                client_payment(agent_table);
+                break;
+            case 0:
+                printf("Exiting client menu.\n");
+                return ;
+            default:
+                printf("Invalid choice, try again.\n");
+        }
+    }
+}
+
+void exit_menu(t_AgentHashTable *agent_table[])
+{
+    int choice;
+    
+    while (1)
+    {
+        printf("\n--- Exit menu ---\n");
+        printf("1. Exit\n");
+        printf("2. Save and Exit\n");
+        printf("0. Return to main menu\n");
+
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+            case 1:
+                exit_mlmsim(agent_table);
+                break;
+            case 2:
+                save_agent_data(agent_table);
+                exit_mlmsim(agent_table);
+                break;
+            case 0:
+                printf("Returning to main menu\n");
+                return ;
+            default:
+                printf("Invalid choice, try again.\n");
+        }
+    }
 }
 
 int main(void)
 {
-  t_Agent *you;
-  t_HashTable agents_table[AGENTS_LIMIT];
-  int running = 1;
-  int choice;
+    t_AgentHashTable *agent_table[AGENTS_LIMIT] = {0};
+    int choice;
 
-  init_table(agents_table);
-  while (running)
-  {
-    printf("[Welcome]");
-    printf("1. -\n");
-    printf("Enter choice: ");
-    scanf("%d", &choice);
-    switch (choice)
+    load_agents_from_csv(agent_table);
+    while (1)
     {
-      case 0:
-        printf("option 0 selected\n");
-        printf("[Exit]");
-        running = 0;
-        break;
-      case 1:
-        printf("option 1 selected\n");
-        //
-        break;
-      default:
-        printf("invalid option");
-        break;
+        printf("\n--- MLM commission calculator ---\n");
+        printf("1. Manager menu: Manage agents\n");
+        printf("2. Client menu: Buy product from an agent\n");
+        printf("0. Exit\n");
+
+        printf("\nEnter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+            case 1:
+                manager_menu(agent_table);
+                break;
+            case 2:
+                client_menu(agent_table);
+                break;
+            case 0:
+                exit_menu(agent_table);
+                break;
+            default:
+                printf("Invalid choice, try again.\n");
+        }
     }
-  }
 }

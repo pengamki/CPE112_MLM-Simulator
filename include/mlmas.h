@@ -6,6 +6,12 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+# define RED "\033[1;31m"
+# define GREEN "\033[1;32m"
+# define YELLOW "\033[1;33m"
+# define BLUE "\033[1;34m"
+# define NOCOLOR "\033[0m"
+
 # define DOWNLINES_LIMIT 10
 # define AGENTS_LIMIT 100
 
@@ -47,6 +53,7 @@ void add_agent_to_table(t_AgentHashTable *agent_table[], t_Agent *agent);
 // query agent
 void query_agent(t_AgentHashTable *agent_table[]);
 // print agent tree
+char *level_agent(int level);
 void agent_tree(t_AgentHashTable *agent_table[]);
 void print_tree_preorder(t_Agent *agent, int level);
 // update agent's commission

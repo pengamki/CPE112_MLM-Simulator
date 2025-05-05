@@ -176,6 +176,19 @@ void query_agent(t_AgentHashTable *agent_table[])
     printf("Current commission rate: %.1f\n", agent->self_commission_rate);
 }
 
+char *level_color(int level)
+{
+  if (level % 4 == 0)
+    return (BLUE);
+  else if (level % 4 == 1)
+    return (GREEN);
+  else if (level % 4 == 2)
+    return (RED);
+  else if (level % 4 == 3)
+    return (YELLOW);
+  return (NOCOLOR);
+}
+
 void agent_tree(t_AgentHashTable *agent_table[])
 {
     bool has_agents;
@@ -221,8 +234,8 @@ void print_tree_preorder(t_Agent *agent, int level)
     if (level)
         printf("|--");
     // Print agent's data
-    printf("Agent ID: %d {Commission rate: %.1f%%, Personal sales: %.2f, Commission earned: %.2f}\n",
-        agent->agent_id, agent->self_commission_rate, agent->personal_sales, agent->commission_earning
+    printf("%sAgent ID: %d {Commission rate: %.1f%%, Personal sales: %.2f, Commission earned: %.2f}%s\n", level_color(level), 
+        agent->agent_id, agent->self_commission_rate, agent->personal_sales, agent->commission_earning, NOCOLOR
     );
     // Pre-order traverse downlines
     for (int i = 0; i < agent->downlines_count; i++)

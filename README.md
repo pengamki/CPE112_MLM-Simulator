@@ -13,13 +13,15 @@ Each agent will earn their commission from their sales relatively. They are able
 - Simulate agent's sales and commission flow
 
 ## Data Structures
-1. **Tree** - Represent a Multi Level Marketing (MLM) structure.
+1. **Tree** - Represent a Multi Level Marketing (MLM) structure which allowed to Pre-order traverse through the tree.
 2. **Hash Map** - Allow user to efficiently search for specific Agent
 3. **Double Linked List** - Each agent can access their up-line and down-line node(s)
 
 ## Dependencies
+- GCC version 13 or higher
 - Make utilities
-- GCC
+- Operating System:
+    - Linux
 
 ## Installation
 1. Clone the repository

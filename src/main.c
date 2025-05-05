@@ -3,6 +3,7 @@
 void manager_menu(t_AgentHashTable *agent_table[])
 {
     int choice;
+    bool valid_scan;
 
     while(1)
     {
@@ -14,9 +15,16 @@ void manager_menu(t_AgentHashTable *agent_table[])
         printf("5. View agent tree\n");
         printf("0. Exit\n");
 
-        printf("Enter your choice: ");
-        scanf("%d", &choice);
+        printf("\nEnter your choice: ");
+        valid_scan = scanf("%d", &choice);
+        while(getchar() != '\n');  
 
+        system("clear");
+        if (!valid_scan)
+        {
+            printf("Numeric choice required, please try again\n");
+            continue;
+        }
         switch (choice) {
             case 1:
                 add_agent(agent_table);
@@ -45,6 +53,7 @@ void manager_menu(t_AgentHashTable *agent_table[])
 void client_menu(t_AgentHashTable *agent_table[])
 {
     int choice;
+    bool valid_scan;
 
     while(1)
     {
@@ -53,8 +62,15 @@ void client_menu(t_AgentHashTable *agent_table[])
         printf("0. Exit\n");
         
         printf("\nEnter your choice: ");
-        scanf("%d", &choice);
+        valid_scan = scanf("%d", &choice);
+        while(getchar() != '\n');  
 
+        system("clear");
+        if (!valid_scan)
+        {
+            printf("Numeric choice required, please try again\n");
+            continue;
+        }
         switch (choice)
         {
             case 1:
@@ -72,6 +88,7 @@ void client_menu(t_AgentHashTable *agent_table[])
 void exit_menu(t_AgentHashTable *agent_table[])
 {
     int choice;
+    bool valid_scan;
     
     while (1)
     {
@@ -80,9 +97,16 @@ void exit_menu(t_AgentHashTable *agent_table[])
         printf("2. Save and Exit\n");
         printf("0. Return to main menu\n");
 
-        printf("Enter your choice: ");
-        scanf("%d", &choice);
+        printf("\nEnter your choice: ");
+        valid_scan = scanf("%d", &choice);
+        while(getchar() != '\n');  
 
+        system("clear");
+        if (!valid_scan)
+        {
+            printf("Numeric choice required, please try again\n");
+            continue;
+        }
         switch (choice)
         {
             case 1:
@@ -105,7 +129,9 @@ int main(void)
 {
     t_AgentHashTable *agent_table[AGENTS_LIMIT] = {0};
     int choice;
+    bool valid_scan;
 
+    system("clear");
     load_agents_from_csv(agent_table);
     while (1)
     {
@@ -115,8 +141,15 @@ int main(void)
         printf("0. Exit\n");
 
         printf("\nEnter your choice: ");
-        scanf("%d", &choice);
+        valid_scan = scanf("%d", &choice);
+        while(getchar() != '\n');  
 
+        system("clear");
+        if (!valid_scan)
+        {
+            printf("Numeric choice required, please try again\n");
+            continue;
+        }
         switch (choice)
         {
             case 1:

@@ -47,6 +47,9 @@ build/%.o:	src/%.c
 	@mkdir -p ./build
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
+run: $(NAME)
+	./$(NAME)
+
 clean:
 	@rm -f build/*.o
 	@$(CLEANED)
@@ -57,4 +60,4 @@ fclean:
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean run re

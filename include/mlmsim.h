@@ -1,10 +1,12 @@
-#ifndef MLMAS_H
-# define MLMAS_H
+#ifndef MLMSIM_H
+# define MLMSIM_H
+
 
 # include <stdlib.h>
 # include <string.h>
 #include <stdio.h>
 #include <stdbool.h>
+
 
 # define RED "\033[1;31m"
 # define GREEN "\033[1;32m"
@@ -14,6 +16,7 @@
 
 # define DOWNLINES_LIMIT 10
 # define AGENTS_LIMIT 100
+
 
 // Agent Tree : Forming a mlm structure use to calculate commissions and view agent's data
 typedef struct s_Agent {
@@ -34,43 +37,47 @@ typedef struct s_AgentHashTable {
     struct s_AgentHashTable *next;
 } t_AgentHashTable;
 
-// Menus
+
+// MENUS
 void manager_menu(t_AgentHashTable *agent_table[]);
 void client_menu(t_AgentHashTable *agent_table[]);
 void exit_menu(t_AgentHashTable *agent_table[]);
 
-// Manager utils
-// utils
-int hash(int agent_id);
-int easy_pow(int base, int pow);
-t_Agent* create_agent(int agent_id, float commission_rate);
-t_Agent* find_agent(t_AgentHashTable *agent_table[], int agent_id);
-bool validate_agent_id(t_AgentHashTable *agent_table[], int agent_id);
+// UTILS_SAVE-LOAD-EXIT
+void save_agents_to_csv(t_AgentHashTable *agent_table[]);
+void load_agents_from_csv(t_AgentHashTable *agent_table[]);
+void exit_mlmsim(t_AgentHashTable *agent_table[]);
+
+// PAGE_MANAGER
 // add agent
 void add_agent(t_AgentHashTable *agent_table[]);
 void add_downline(t_Agent *upline, t_Agent *new_agent);
 void add_agent_to_table(t_AgentHashTable *agent_table[], t_Agent *agent);
-// query agent
-void query_agent(t_AgentHashTable *agent_table[]);
-// print agent tree
-char *level_agent(int level);
-void agent_tree(t_AgentHashTable *agent_table[]);
-void print_tree_preorder(t_Agent *agent, int level);
 // update agent's commission
 void update_agent(t_AgentHashTable *agent_table[]);
 // remove agent
 void remove_agent(t_AgentHashTable *agent_table[]);
 void remove_agent_connection(t_Agent *agent);
 void remove_agent_from_hashtable(t_AgentHashTable *agent_table[], int agent_id);
+// query agent
+void query_agent(t_AgentHashTable *agent_table[]);
+// print agent tree
+void agent_tree(t_AgentHashTable *agent_table[]);
+void print_tree_preorder(t_Agent *agent, int level);
 
-// Client utils
+// UTILS_MANAGER
+int hash(int agent_id);
+t_Agent* create_agent(int agent_id, float commission_rate);
+t_Agent* find_agent(t_AgentHashTable *agent_table[], int agent_id);
+bool validate_agent_id(t_AgentHashTable *agent_table[], int agent_id);
+char *level_color(int level);
+
+// PAGE_CLIENT
 // payment
-int easy_pow(int base, int pow);
-void client_payment(t_AgentHashTable *agent_table[]);
+void client_payment_page(t_AgentHashTable *agent_table[]);
+void client_payment(t_AgentHashTable *agent_table[], int agent_id, float pay_amount);
 
-// Save, Load and Exit
-void exit_mlmsim(t_AgentHashTable *agent_table[]);
-void save_agent_data(t_AgentHashTable *agent_table[]);
-void load_agents_from_csv(t_AgentHashTable *agent_table[]);
+// UTILS_CLIENT
+int easy_pow(int base, int pow);
 
 #endif

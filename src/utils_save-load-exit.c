@@ -1,32 +1,6 @@
-#include "mlmas.h"
+#include "mlmsim.h"
 
-void exit_mlmsim(t_AgentHashTable *agent_table[])
-{
-    t_AgentHashTable *current;
-    t_AgentHashTable *tmp;
-    t_Agent *agents[AGENTS_LIMIT] = {0};
-    int agent_count;
-
-    agent_count = 0;
-    for (int i = 0; i < AGENTS_LIMIT; i++)
-    {
-        current = agent_table[i];
-        while (current)
-        {
-            tmp = current;
-            current = current->next;
-            agents[agent_count++] = tmp->agent_node;
-            // Free the individual t_AgentHashTable node
-            free(tmp);
-        }
-    }
-    // Free each t_Agent node
-    for (int i = 0; i < agent_count; i++)
-        free(agents[i]);
-    exit(0);
-}
-
-void save_agent_data(t_AgentHashTable *agent_table[])
+void save_agents_to_csv(t_AgentHashTable *agent_table[])
 {
     FILE *file;
     t_AgentHashTable *ptr;
@@ -113,4 +87,30 @@ void load_agents_from_csv(t_AgentHashTable *agent_table[])
     }
     fclose(file);
     printf("Agent data loaded from data/agents_data.csv\n");
+}
+
+void exit_mlmsim(t_AgentHashTable *agent_table[])
+{
+    t_AgentHashTable *current;
+    t_AgentHashTable *tmp;
+    t_Agent *agents[AGENTS_LIMIT] = {0};
+    int agent_count;
+
+    agent_count = 0;
+    for (int i = 0; i < AGENTS_LIMIT; i++)
+    {
+        current = agent_table[i];
+        while (current)
+        {
+            tmp = current;
+            current = current->next;
+            agents[agent_count++] = tmp->agent_node;
+            // Free the individual t_AgentHashTable node
+            free(tmp);
+        }
+    }
+    // Free each t_Agent node
+    for (int i = 0; i < agent_count; i++)
+        free(agents[i]);
+    exit(0);
 }

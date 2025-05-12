@@ -1,4 +1,4 @@
-#include "mlmas.h"
+#include "mlmsim.h"
 
 void manager_menu(t_AgentHashTable *agent_table[])
 {
@@ -13,7 +13,7 @@ void manager_menu(t_AgentHashTable *agent_table[])
         printf("3. Remove an agent\n");
         printf("4. Query an agent\n");
         printf("5. View agent tree\n");
-        printf("0. Exit\n");
+        printf("0. Return to main menu\n");
 
         printf("\nEnter your choice: ");
         valid_scan = scanf("%d", &choice);
@@ -22,7 +22,7 @@ void manager_menu(t_AgentHashTable *agent_table[])
         system("clear");
         if (!valid_scan)
         {
-            printf("Numeric choice required, please try again\n");
+            printf("Numeric answer required, please try again.\n");
             continue;
         }
         switch (choice) {
@@ -45,7 +45,7 @@ void manager_menu(t_AgentHashTable *agent_table[])
                 printf("Exiting manager menu.\n");
                 return ;
             default:
-                printf("Invalid choice, try again.\n");
+                printf("Invalid choice, please try again.\n");
         }
     }
 }
@@ -59,7 +59,7 @@ void client_menu(t_AgentHashTable *agent_table[])
     {
         printf("\n--- Client menu ---\n");
         printf("1. Make a payment\n");
-        printf("0. Exit\n");
+        printf("0. Return to main menu\n");
         
         printf("\nEnter your choice: ");
         valid_scan = scanf("%d", &choice);
@@ -68,19 +68,19 @@ void client_menu(t_AgentHashTable *agent_table[])
         system("clear");
         if (!valid_scan)
         {
-            printf("Numeric choice required, please try again\n");
+            printf("Numeric answer required, please try again.\n");
             continue;
         }
         switch (choice)
         {
             case 1:
-                client_payment(agent_table);
+                client_payment_page(agent_table);
                 break;
             case 0:
                 printf("Exiting client menu.\n");
                 return ;
             default:
-                printf("Invalid choice, try again.\n");
+                printf("Invalid choice, please try again.\n");
         }
     }
 }
@@ -104,7 +104,7 @@ void exit_menu(t_AgentHashTable *agent_table[])
         system("clear");
         if (!valid_scan)
         {
-            printf("Numeric choice required, please try again\n");
+            printf("Numeric answer required, please try again.\n");
             continue;
         }
         switch (choice)
@@ -113,14 +113,14 @@ void exit_menu(t_AgentHashTable *agent_table[])
                 exit_mlmsim(agent_table);
                 break;
             case 2:
-                save_agent_data(agent_table);
+                save_agents_to_csv(agent_table);
                 exit_mlmsim(agent_table);
                 break;
             case 0:
                 printf("Returning to main menu\n");
                 return ;
             default:
-                printf("Invalid choice, try again.\n");
+                printf("Invalid choice, please try again.\n");
         }
     }
 }
@@ -137,7 +137,7 @@ int main(void)
     {
         printf("\n--- MLM commission calculator ---\n");
         printf("1. Manager menu: Manage agents\n");
-        printf("2. Client menu: Buy product from an agent\n");
+        printf("2. Client menu: Simulate a payment\n");
         printf("0. Exit\n");
 
         printf("\nEnter your choice: ");
@@ -147,7 +147,7 @@ int main(void)
         system("clear");
         if (!valid_scan)
         {
-            printf("Numeric choice required, please try again\n");
+            printf("Numeric answer required, please try again.\n");
             continue;
         }
         switch (choice)
@@ -162,7 +162,7 @@ int main(void)
                 exit_menu(agent_table);
                 break;
             default:
-                printf("Invalid choice, try again.\n");
+                printf("Invalid choice, please try again.\n");
         }
     }
 }

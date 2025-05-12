@@ -1,47 +1,14 @@
-#include "mlmas.h"
+#include "mlmsim.h"
 
-int easy_pow(int base, int pow)
+void client_payment(t_AgentHashTable *agent_table[], int agent_id, float pay_amount)
 {
-    int sum;
-
-    if (base <= 1)
-        return (base);
-    sum = base;
-    while (pow > 1)
-    {
-        sum *= base;
-        pow--;
-    }
-    return (sum);
-}
-
-void client_payment(t_AgentHashTable *agent_table[])
-{
-    int agent_id;
-    float pay_amount;
+    t_Agent *agent;
     float agent_commission;
     float upline_commission;
     float commission_rate;
-    t_Agent *agent;
     t_Agent *upline_ptr;
     int upline_level;
 
-    // Input : agent_id
-    printf("Enter agent id to pay: ");
-    scanf("%d", &agent_id);
-    // Validate : agent_id
-    if (!validate_agent_id(agent_table, agent_id))
-        return ;
-    // Input : pay_amount
-    printf("Enter pay amount: ");
-    scanf("%f", &pay_amount);
-    // Validate : pay_amount
-    if (pay_amount <= 0.0)
-    {
-        printf("Invalid amount, please try again\n");
-        return ;
-    }
-    // Update agent's personal_sales and commission_earning
     agent = find_agent(agent_table, agent_id);
     upline_level = 0;
     commission_rate = agent->self_commission_rate;
@@ -61,4 +28,42 @@ void client_payment(t_AgentHashTable *agent_table[])
         commission_rate /= 2;
         upline_ptr = upline_ptr->upline;
     }
+
+}
+
+void client_payment_page(t_AgentHashTable *agent_table[])
+{
+    int agent_id;
+    float pay_amount;
+    bool valid_scan;
+
+    // Input : agent_id
+    printf("Enter agent id to pay: ");
+    valid_scan = scanf("%d", &agent_id);
+    while(getchar() != '\n');
+    if (!valid_scan)
+    {
+        printf("Numeric answer required, please try again.\n");
+        return;
+    }
+    // Validate : agent_id
+    if (!validate_agent_id(agent_table, agent_id))
+        return ;
+    // Input : pay_amount
+    printf("Enter pay amount: ");
+    valid_scan = scanf("%f", &pay_amount);
+    while(getchar() != '\n');
+    if (!valid_scan)
+    {
+        printf("Numeric answer required, please try again.");
+        return;
+    }
+    // Validate : pay_amount
+    if (pay_amount <= 0.0)
+    {
+        printf("Invalid amount, please try again\n");
+        return ;
+    }
+    // Update agent's personal_sales and commission_earning
+    client_payment(agent_table, agent_id, pay_amount);
 }

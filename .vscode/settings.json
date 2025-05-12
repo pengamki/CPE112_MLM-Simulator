@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "mlmas.h": "c",
+        "utils_manager": "c"
+    }
+}

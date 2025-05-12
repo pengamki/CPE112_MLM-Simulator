@@ -1,5 +1,47 @@
 #include "mlmsim.h"
 
+int main(void)
+{
+    t_AgentHashTable *agent_table[AGENTS_LIMIT] = {0};
+    int choice;
+    bool valid_scan;
+
+    system("clear");
+    load_agents_from_csv(agent_table);
+    while (1)
+    {
+        printf("\n--- MLM commission calculator ---\n");
+        printf("1. Manager menu: Manage agents\n");
+        printf("2. Client menu: Simulate a payment\n");
+        printf("0. Exit\n");
+
+        printf("\nEnter your choice: ");
+        valid_scan = scanf("%d", &choice);
+        while(getchar() != '\n');  
+
+        system("clear");
+        if (!valid_scan)
+        {
+            printf("Numeric answer required, please try again.\n");
+            continue;
+        }
+        switch (choice)
+        {
+            case 1:
+                manager_menu(agent_table);
+                break;
+            case 2:
+                client_menu(agent_table);
+                break;
+            case 0:
+                exit_menu(agent_table);
+                break;
+            default:
+                printf("Invalid choice, please try again.\n");
+        }
+    }
+}
+
 void manager_menu(t_AgentHashTable *agent_table[])
 {
     int choice;
@@ -125,44 +167,3 @@ void exit_menu(t_AgentHashTable *agent_table[])
     }
 }
 
-int main(void)
-{
-    t_AgentHashTable *agent_table[AGENTS_LIMIT] = {0};
-    int choice;
-    bool valid_scan;
-
-    system("clear");
-    load_agents_from_csv(agent_table);
-    while (1)
-    {
-        printf("\n--- MLM commission calculator ---\n");
-        printf("1. Manager menu: Manage agents\n");
-        printf("2. Client menu: Simulate a payment\n");
-        printf("0. Exit\n");
-
-        printf("\nEnter your choice: ");
-        valid_scan = scanf("%d", &choice);
-        while(getchar() != '\n');  
-
-        system("clear");
-        if (!valid_scan)
-        {
-            printf("Numeric answer required, please try again.\n");
-            continue;
-        }
-        switch (choice)
-        {
-            case 1:
-                manager_menu(agent_table);
-                break;
-            case 2:
-                client_menu(agent_table);
-                break;
-            case 0:
-                exit_menu(agent_table);
-                break;
-            default:
-                printf("Invalid choice, please try again.\n");
-        }
-    }
-}
